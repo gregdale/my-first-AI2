@@ -1,7 +1,6 @@
 'use strict'
 
 exports.handle = function handle(client) {
-
   const sayHello = client.createStep({
     satisfied() {
       return Boolean(client.getConversationState().helloSent)
@@ -32,15 +31,14 @@ exports.handle = function handle(client) {
   })
 
   const handleGreeting = client.createStep({
-      satisfied() {
-        return false
-      },
+    satisfied() {
+      return false
+    },
 
-      prompt() {
-        client.AddTextResponse('Hello world, I mean human')
-        client.done()
-      }
-
+    prompt() {
+      client.addTextResponse('Hello world, I mean human')
+      client.done()
+    }
   })
 
   const handleGoodbye = client.createStep({
@@ -49,19 +47,17 @@ exports.handle = function handle(client) {
     },
 
     prompt() {
-      client.AddTextResponse('See you later!')
+      client.addTextResponse('See you later!')
       client.done()
     }
   })
 
   client.runFlow({
     classifications: {
-			// map inbound message classifications to names of streams
+      goodbye: 'goodbye',
       greeting: 'greeting'
-      goodbye: 'goodbye'
     },
     streams: {
-      // Add a stream for greetings and assign it a Step
       goodbye: handleGoodbye,
       greeting: handleGreeting,
       main: 'onboarding',
