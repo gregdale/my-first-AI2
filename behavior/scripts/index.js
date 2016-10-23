@@ -33,7 +33,7 @@ exports.handle = function handle(client) {
 
   const handleGreeting = client.createStep({
       satisfied() {
-        return  false
+        return false
       },
 
       prompt() {
@@ -58,6 +58,7 @@ exports.handle = function handle(client) {
     classifications: {
 			// map inbound message classifications to names of streams
       greeting: 'greeting'
+      goodbye: 'goodbye'
     },
     streams: {
       // Add a stream for greetings and assign it a Step
